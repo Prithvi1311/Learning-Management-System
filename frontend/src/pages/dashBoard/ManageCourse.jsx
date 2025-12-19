@@ -11,7 +11,6 @@ const { Option } = Select;
 
 function ManageCourse() {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [course, setCourse] = useState(null);
     const [lessons, setLessons] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,26 +19,25 @@ function ManageCourse() {
     const [form] = Form.useForm();
 
     useEffect(() => {
+        const fetchCourseData = async () => {
+            try {
+                const courseRes = await courseService.getCourseById(id);
+                if (courseRes.success) {
+                    setCourse(courseRes.data);
+                    // If lessons are not included in course directly, fetch them
+                    const lessonsRes = await lessonService.getLessonsByCourse(id);
+                    if (lessonsRes.success) {
+                        setLessons(lessonsRes.data);
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchCourseData();
     }, [id]);
-
-    const fetchCourseData = async () => {
-        try {
-            const courseRes = await courseService.getCourseById(id);
-            if (courseRes.success) {
-                setCourse(courseRes.data);
-                // If lessons are not included in course directly, fetch them
-                const lessonsRes = await lessonService.getLessonsByCourse(id);
-                if (lessonsRes.success) {
-                    setLessons(lessonsRes.data);
-                }
-            }
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleAddLesson = async (values) => {
         setLessonLoading(true);

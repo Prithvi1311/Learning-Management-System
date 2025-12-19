@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   Form,
@@ -41,10 +41,7 @@ function AddQuestion({ courseId, onBack }) {
   const [isAddModalVisible, setIsAddModalVisible] = useState(false); // New state for Add Modal
   const [editForm] = Form.useForm();
 
-  useEffect(() => {
-    fetchQuestions();
-  }, [courseId, fetchQuestions]);
-
+  /* fetchQuestions logic moved up */
   const fetchQuestions = useCallback(async () => {
     setLoadingQuestions(true);
     try {
@@ -60,6 +57,12 @@ function AddQuestion({ courseId, onBack }) {
       setLoadingQuestions(false);
     }
   }, [courseId]);
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [courseId, fetchQuestions]);
+
+  /* handleCancel removed */
 
   const getActualAnswerValue = (values, selectedAnswer) => {
     const answerMap = {
@@ -169,9 +172,7 @@ function AddQuestion({ courseId, onBack }) {
     }
   };
 
-  const handleCancel = () => {
-    navigate(-1);
-  };
+
 
   const columns = [
     {

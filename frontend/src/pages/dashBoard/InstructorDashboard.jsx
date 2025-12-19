@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from "../../Components/common/Navbar";
 import { useUserContext } from "../../contexts/UserContext";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BookOpen, Plus, Users, BarChart } from 'lucide-react';
-import { authService } from '../../api/auth.service';
 
 function InstructorDashboard() {
     const { user } = useUserContext();
-    const navigate = useNavigate();
-    const [stats, setStats] = useState({
+    const [stats] = useState({
         totalCourses: 0,
         totalStudents: 0,
         totalReviews: 0,
