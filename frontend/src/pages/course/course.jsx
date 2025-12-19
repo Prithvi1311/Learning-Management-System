@@ -40,7 +40,6 @@ const Course = () => {
 
   const handleLessonChange = (lesson) => {
     setCurrentLesson(lesson);
-    setPlayed(0); // Reset progress for new lesson
   };
 
   if (loading) return <div className="p-8 text-center">Loading Course...</div>;
