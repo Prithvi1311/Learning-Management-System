@@ -18,26 +18,27 @@ function ManageCourse() {
     const [lessonLoading, setLessonLoading] = useState(false);
     const [form] = Form.useForm();
 
-    useEffect(() => {
-        const fetchCourseData = async () => {
-            try {
-                const courseRes = await courseService.getCourseById(id);
-                if (courseRes.success) {
-                    setCourse(courseRes.data);
-                    // If lessons are not included in course directly, fetch them
-                    const lessonsRes = await lessonService.getLessonsByCourse(id);
-                    if (lessonsRes.success) {
-                        setLessons(lessonsRes.data);
-                    }
+    const fetchCourseData = React.useCallback(async () => {
+        try {
+            const courseRes = await courseService.getCourseById(id);
+            if (courseRes.success) {
+                setCourse(courseRes.data);
+                // If lessons are not included in course directly, fetch them
+                const lessonsRes = await lessonService.getLessonsByCourse(id);
+                if (lessonsRes.success) {
+                    setLessons(lessonsRes.data);
                 }
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
             }
-        };
-        fetchCourseData();
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     }, [id]);
+
+    useEffect(() => {
+        fetchCourseData();
+    }, [id, fetchCourseData]);
 
     const handleAddLesson = async (values) => {
         setLessonLoading(true);
