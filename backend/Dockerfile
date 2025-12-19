@@ -11,6 +11,8 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
 # Download dependencies (this step isolates dependency downloading from code changes)
+# Grant execution permissions to the wrapper
+RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 
 # Copy the rest of the source code
