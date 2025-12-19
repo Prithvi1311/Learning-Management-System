@@ -67,24 +67,24 @@ function Footer() {
           © {new Date().getFullYear()} All rights reserved.
         </p>
         <div className="flex space-x-4 mt-4 md:mt-0">
-          <a
-            href="#"
+          <button
+            type="button"
             className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-indigo-600 text-white transition"
           >
             <FontAwesomeIcon icon={faFacebookF} />
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
+            type="button"
             className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-500 text-white transition"
           >
             <FontAwesomeIcon icon={faInstagram} />
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
+            type="button"
             className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-500 text-white transition"
           >
             <FontAwesomeIcon icon={faLinkedinIn} />
-          </a>
+          </button>
         </div>
       </div>
     </footer>

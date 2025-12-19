@@ -20,23 +20,22 @@ const TakeQuiz = () => {
     const userId = localStorage.getItem("id");
 
     useEffect(() => {
+        const fetchQuestions = async () => {
+            try {
+                const result = await questionService.getQuestionsByCourse(courseId);
+                if (result.success) {
+                    setQuestions(result.data);
+                } else {
+                    message.error("Failed to load questions");
+                }
+            } catch (error) {
+                message.error("Error loading quiz");
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchQuestions();
     }, [courseId]);
-
-    const fetchQuestions = async () => {
-        try {
-            const result = await questionService.getQuestionsByCourse(courseId);
-            if (result.success) {
-                setQuestions(result.data);
-            } else {
-                message.error("Failed to load questions");
-            }
-        } catch (error) {
-            message.error("Error loading quiz");
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleAnswerChange = (questionId, value) => {
         setAnswers(prev => ({

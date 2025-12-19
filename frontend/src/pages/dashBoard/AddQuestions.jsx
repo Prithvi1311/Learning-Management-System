@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { 
-  Card, 
-  Form, 
-  Input, 
-  Select, 
-  Button, 
-  Typography, 
-  message, 
-  Row, 
+import {
+  Card,
+  Form,
+  Input,
+  Select,
+  Button,
+  Typography,
+  message,
+  Row,
   Col,
-  Divider,
   Table,
   Modal,
   Popconfirm
 } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faQuestionCircle, 
-  faArrowLeft, 
+import {
+  faQuestionCircle,
+  faArrowLeft,
   faPlus,
   faEdit,
   faTrash,
@@ -32,7 +31,6 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function AddQuestion({ courseId, onBack }) {
-  const location = useLocation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -42,12 +40,12 @@ function AddQuestion({ courseId, onBack }) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false); // New state for Add Modal
   const [editForm] = Form.useForm();
-  
+
   useEffect(() => {
     fetchQuestions();
-  }, [courseId]);
+  }, [courseId, fetchQuestions]);
 
-  const fetchQuestions = async () => {
+  const fetchQuestions = useCallback(async () => {
     setLoadingQuestions(true);
     try {
       const result = await questionService.getQuestionsByCourse(courseId);
@@ -61,7 +59,7 @@ function AddQuestion({ courseId, onBack }) {
     } finally {
       setLoadingQuestions(false);
     }
-  };
+  }, [courseId]);
 
   const getActualAnswerValue = (values, selectedAnswer) => {
     const answerMap = {
@@ -77,7 +75,7 @@ function AddQuestion({ courseId, onBack }) {
     setLoading(true);
     try {
       const actualAnswerValue = getActualAnswerValue(values, values.answer);
-      
+
       const questionData = {
         question: values.question,
         option1: values.option1,
@@ -107,13 +105,13 @@ function AddQuestion({ courseId, onBack }) {
 
   const handleEdit = (question) => {
     setEditingQuestion(question);
-    
+
     let selectedAnswer = 'option1';
     if (question.answer === question.option1) selectedAnswer = 'option1';
     else if (question.answer === question.option2) selectedAnswer = 'option2';
     else if (question.answer === question.option3) selectedAnswer = 'option3';
     else if (question.answer === question.option4) selectedAnswer = 'option4';
-    
+
     editForm.setFieldsValue({
       question: question.question,
       option1: question.option1,
@@ -127,10 +125,10 @@ function AddQuestion({ courseId, onBack }) {
 
   const handleEditSubmit = async (values) => {
     if (!editingQuestion) return;
-    
+
     try {
       const actualAnswerValue = getActualAnswerValue(values, values.answer);
-      
+
       const questionData = {
         question: values.question,
         option1: values.option1,

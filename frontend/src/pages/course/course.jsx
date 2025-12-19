@@ -13,7 +13,7 @@ const Course = () => {
   const [currentLesson, setCurrentLesson] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [played, setPlayed] = useState(0); // Kept for onProgress, though unused logic removed
+  /* played state removed */
   const [videoCompleted, setVideoCompleted] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -70,7 +70,7 @@ const Course = () => {
                       controls
                       width="100%"
                       height="100%"
-                      onProgress={(state) => setPlayed(state.played)}
+
                       onEnded={() => setVideoCompleted(true)}
                     />
                   )}

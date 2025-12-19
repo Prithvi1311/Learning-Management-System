@@ -165,9 +165,9 @@ function Login() {
           <div className="text-center">
             <p className="text-sm text-gray-500">
               By signing in, you agree to our{" "}
-              <a href="#" className="text-blue-600 hover:text-blue-700 transition-colors">Terms of Service</a>
+              <Link to="/" className="text-blue-600 hover:text-blue-700 transition-colors">Terms of Service</Link>
               {" "}and{" "}
-              <a href="#" className="text-blue-600 hover:text-blue-700 transition-colors">Privacy Policy</a>
+              <Link to="/" className="text-blue-600 hover:text-blue-700 transition-colors">Privacy Policy</Link>
             </p>
           </div>
         </div>

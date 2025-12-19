@@ -231,8 +231,8 @@ function RegistrationForm() {
                 type="submit"
                 disabled={isLoading}
                 className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-300 ${isLoading
-                    ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-                    : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
+                  ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                  : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
                   }`}
               >
                 {isLoading ? (
@@ -275,9 +275,9 @@ function RegistrationForm() {
           <div className="text-center">
             <p className="text-sm text-gray-500">
               By creating an account, you agree to our{" "}
-              <a href="#" className="text-blue-600 hover:text-blue-700 transition-colors">Terms of Service</a>
+              <Link to="/" className="text-blue-600 hover:text-blue-700 transition-colors">Terms of Service</Link>
               {" "}and{" "}
-              <a href="#" className="text-blue-600 hover:text-blue-700 transition-colors">Privacy Policy</a>
+              <Link to="/" className="text-blue-600 hover:text-blue-700 transition-colors">Privacy Policy</Link>
             </p>
           </div>
         </div>

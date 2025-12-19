@@ -8,7 +8,7 @@ export const useUserContext = () => {
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user'); // Or reconstruct from individual items
+    // storedUser removed as it was unused
     // auth.service.js stores: token, email, name, id, role
     const id = localStorage.getItem('id');
     const name = localStorage.getItem('name');
