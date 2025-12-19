@@ -23,4 +23,4 @@ RUN ./mvnw clean package -DskipTests
 
 # Run the jar file
 # Adjust the jar name pattern if necessary
-CMD ["java", "-jar", "target/lms-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/Learning-Management-System-0.0.1-SNAPSHOT.jar"]
